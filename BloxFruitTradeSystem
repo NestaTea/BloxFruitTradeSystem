@@ -1,0 +1,82 @@
+-- Create the main ScreenGui
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "BloxFruit Trade System"
+screenGui.Parent = game.Players.LocalPlayer.PlayerGui
+
+-- Create the main Frame
+local mainFrame = Instance.new("Frame")
+mainFrame.Size = UDim2.new(0, 300, 0, 150)
+mainFrame.Position = UDim2.new(0.5, -150, 0.5, -75) -- Center it
+mainFrame.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+mainFrame.BorderSizePixel = 2
+mainFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+mainFrame.Parent = screenGui
+
+-- Title label for the GUI
+local titleLabel = Instance.new("TextLabel")
+titleLabel.Text = "BloxFruit Trade System"
+titleLabel.Size = UDim2.new(1, 0, 0, 40)
+titleLabel.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+titleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+titleLabel.TextSize = 20
+titleLabel.TextAlign = Enum.TextAnchor.MiddleCenter
+titleLabel.Parent = mainFrame
+
+-- Function to make the GUI movable
+local dragging = false
+local dragStart = nil
+local startPos = nil
+
+mainFrame.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        dragging = true
+        dragStart = input.Position
+        startPos = mainFrame.Position
+    end
+end)
+
+mainFrame.InputChanged:Connect(function(input)
+    if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
+        local delta = input.Position - dragStart
+        mainFrame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+    end
+end)
+
+mainFrame.InputEnded:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        dragging = false
+    end
+end)
+
+-- Create Freeze Trade Button
+local freezeButton = Instance.new("TextButton")
+freezeButton.Size = UDim2.new(0, 120, 0, 40)
+freezeButton.Position = UDim2.new(0.5, -130, 0.5, -30)
+freezeButton.Text = "Freeze Trade"
+freezeButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+freezeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+freezeButton.TextSize = 18
+freezeButton.Parent = mainFrame
+
+-- Button functionality for Freeze Trade
+freezeButton.MouseButton1Click:Connect(function()
+    print("Freeze Trade clicked!")
+    -- Add Freeze Trade functionality here
+end)
+
+-- Create Force Accept Button
+local forceAcceptButton = Instance.new("TextButton")
+forceAcceptButton.Size = UDim2.new(0, 120, 0, 40)
+forceAcceptButton.Position = UDim2.new(0.5, 10, 0.5, -30)
+forceAcceptButton.Text = "Force Accept"
+forceAcceptButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+forceAcceptButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+forceAcceptButton.TextSize = 18
+forceAcceptButton.Parent = mainFrame
+
+-- Button functionality for Force Accept
+forceAcceptButton.MouseButton1Click:Connect(function()
+    print("Force Accept clicked!")
+    -- Add Force Accept functionality here
+end)
+
