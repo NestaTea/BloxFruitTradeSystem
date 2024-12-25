@@ -3,21 +3,21 @@ local screenGui = Instance.new("ScreenGui")
 screenGui.Name = "BloxFruit Trade System"
 screenGui.Parent = game.Players.LocalPlayer.PlayerGui
 
--- Create the main Frame
+-- Create the main Frame (Container for the UI)
 local mainFrame = Instance.new("Frame")
-mainFrame.Size = UDim2.new(0, 300, 0, 150)
-mainFrame.Position = UDim2.new(0.5, -150, 0.5, -75) -- Center it
-mainFrame.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+mainFrame.Size = UDim2.new(0, 300, 0, 200)  -- Increased height for better visibility
+mainFrame.Position = UDim2.new(0.5, -150, 0.5, -100) -- Center it more clearly
+mainFrame.BackgroundColor3 = Color3.fromRGB(45, 45, 45) -- Dark background for the frame
 mainFrame.BorderSizePixel = 2
-mainFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+mainFrame.BorderColor3 = Color3.fromRGB(255, 255, 255) -- White border for contrast
 mainFrame.Parent = screenGui
 
 -- Title label for the GUI
 local titleLabel = Instance.new("TextLabel")
 titleLabel.Text = "BloxFruit Trade System"
-titleLabel.Size = UDim2.new(1, 0, 0, 40)
-titleLabel.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-titleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+titleLabel.Size = UDim2.new(1, 0, 0, 40) -- Takes up the full width
+titleLabel.BackgroundColor3 = Color3.fromRGB(25, 25, 25) -- Darker background for the header
+titleLabel.TextColor3 = Color3.fromRGB(255, 255, 255) -- White text
 titleLabel.TextSize = 20
 titleLabel.TextAlign = Enum.TextAnchor.MiddleCenter
 titleLabel.Parent = mainFrame
@@ -51,10 +51,10 @@ end)
 -- Create Freeze Trade Button
 local freezeButton = Instance.new("TextButton")
 freezeButton.Size = UDim2.new(0, 120, 0, 40)
-freezeButton.Position = UDim2.new(0.5, -130, 0.5, -30)
+freezeButton.Position = UDim2.new(0.5, -130, 0.5, 20) -- Slightly lower position for both buttons
 freezeButton.Text = "Freeze Trade"
-freezeButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
-freezeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+freezeButton.BackgroundColor3 = Color3.fromRGB(60, 60, 60) -- Lighter gray background for button
+freezeButton.TextColor3 = Color3.fromRGB(255, 255, 255) -- White text color
 freezeButton.TextSize = 18
 freezeButton.Parent = mainFrame
 
@@ -67,10 +67,10 @@ end)
 -- Create Force Accept Button
 local forceAcceptButton = Instance.new("TextButton")
 forceAcceptButton.Size = UDim2.new(0, 120, 0, 40)
-forceAcceptButton.Position = UDim2.new(0.5, 10, 0.5, -30)
+forceAcceptButton.Position = UDim2.new(0.5, 10, 0.5, 70) -- Adjusted to avoid overlap
 forceAcceptButton.Text = "Force Accept"
-forceAcceptButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
-forceAcceptButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+forceAcceptButton.BackgroundColor3 = Color3.fromRGB(60, 60, 60) -- Lighter gray background for button
+forceAcceptButton.TextColor3 = Color3.fromRGB(255, 255, 255) -- White text color
 forceAcceptButton.TextSize = 18
 forceAcceptButton.Parent = mainFrame
 
@@ -79,4 +79,3 @@ forceAcceptButton.MouseButton1Click:Connect(function()
     print("Force Accept clicked!")
     -- Add Force Accept functionality here
 end)
-
