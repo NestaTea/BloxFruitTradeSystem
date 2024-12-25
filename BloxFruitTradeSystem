@@ -1,81 +1,43 @@
--- Create the main ScreenGui
-local screenGui = Instance.new("ScreenGui")
-screenGui.Name = "BloxFruit Trade System"
-screenGui.Parent = game.Players.LocalPlayer.PlayerGui
+-- Load Orion library
+local OrionLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/shlexware/Orion/main/source"))()
 
--- Create the main Frame (Container for the UI)
-local mainFrame = Instance.new("Frame")
-mainFrame.Size = UDim2.new(0, 300, 0, 200)  -- Increased height for better visibility
-mainFrame.Position = UDim2.new(0.5, -150, 0.5, -100) -- Center it more clearly
-mainFrame.BackgroundColor3 = Color3.fromRGB(45, 45, 45) -- Dark background for the frame
-mainFrame.BorderSizePixel = 2
-mainFrame.BorderColor3 = Color3.fromRGB(255, 255, 255) -- White border for contrast
-mainFrame.Parent = screenGui
+-- Create the main window
+local Window = OrionLib:MakeWindow({
+    Name = "Blox Fruit Trade System",
+    HidePremium = false,
+    SaveConfig = true,
+    ConfigFolder = "OrionTest"
+})
 
--- Title label for the GUI
-local titleLabel = Instance.new("TextLabel")
-titleLabel.Text = "BloxFruit Trade System"
-titleLabel.Size = UDim2.new(1, 0, 0, 40) -- Takes up the full width
-titleLabel.BackgroundColor3 = Color3.fromRGB(25, 25, 25) -- Darker background for the header
-titleLabel.TextColor3 = Color3.fromRGB(255, 255, 255) -- White text
-titleLabel.TextSize = 20
-titleLabel.TextAlign = Enum.TextAnchor.MiddleCenter
-titleLabel.Parent = mainFrame
+-- Add buttons to the window
+local Tab = Window:MakeTab({
+    Name = "Trade Actions",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
 
--- Function to make the GUI movable
-local dragging = false
-local dragStart = nil
-local startPos = nil
-
-mainFrame.InputBegan:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseButton1 then
-        dragging = true
-        dragStart = input.Position
-        startPos = mainFrame.Position
+-- Freeze Trade button functionality
+Tab:AddButton({
+    Name = "Freeze Trade",
+    Callback = function()
+        -- Here you could implement functionality to freeze the trade
+        -- For example, we could just disable trading actions or GUI elements.
+        print("Trade has been frozen.")
+        -- Disable trade (example):
+        -- game:GetService("ReplicatedStorage").TradeModule:Disable() -- (Adjust this to your system)
     end
-end)
+})
 
-mainFrame.InputChanged:Connect(function(input)
-    if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
-        local delta = input.Position - dragStart
-        mainFrame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+-- Force Accept button functionality
+Tab:AddButton({
+    Name = "Force Accept",
+    Callback = function()
+        -- Force accept the trade automatically
+        print("Trade has been force accepted.")
+        -- Example: Trigger trade acceptance automatically
+        -- game:GetService("ReplicatedStorage").TradeModule:ForceAccept() -- (Adjust this to your system)
     end
-end)
+})
 
-mainFrame.InputEnded:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseButton1 then
-        dragging = false
-    end
-end)
-
--- Create Freeze Trade Button
-local freezeButton = Instance.new("TextButton")
-freezeButton.Size = UDim2.new(0, 120, 0, 40)
-freezeButton.Position = UDim2.new(0.5, -130, 0.5, 20) -- Slightly lower position for both buttons
-freezeButton.Text = "Freeze Trade"
-freezeButton.BackgroundColor3 = Color3.fromRGB(60, 60, 60) -- Lighter gray background for button
-freezeButton.TextColor3 = Color3.fromRGB(255, 255, 255) -- White text color
-freezeButton.TextSize = 18
-freezeButton.Parent = mainFrame
-
--- Button functionality for Freeze Trade
-freezeButton.MouseButton1Click:Connect(function()
-    print("Freeze Trade clicked!")
-    -- Add Freeze Trade functionality here
-end)
-
--- Create Force Accept Button
-local forceAcceptButton = Instance.new("TextButton")
-forceAcceptButton.Size = UDim2.new(0, 120, 0, 40)
-forceAcceptButton.Position = UDim2.new(0.5, 10, 0.5, 70) -- Adjusted to avoid overlap
-forceAcceptButton.Text = "Force Accept"
-forceAcceptButton.BackgroundColor3 = Color3.fromRGB(60, 60, 60) -- Lighter gray background for button
-forceAcceptButton.TextColor3 = Color3.fromRGB(255, 255, 255) -- White text color
-forceAcceptButton.TextSize = 18
-forceAcceptButton.Parent = mainFrame
-
--- Button functionality for Force Accept
-forceAcceptButton.MouseButton1Click:Connect(function()
-    print("Force Accept clicked!")
-    -- Add Force Accept functionality here
-end)
+-- Show the Orion window
+OrionLib:Init()
